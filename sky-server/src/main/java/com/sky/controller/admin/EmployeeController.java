@@ -1,6 +1,7 @@
 package com.sky.controller.admin;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +28,9 @@ import java.util.Map;
 @Slf4j
 public class EmployeeController {
 
-    @Autowired
+    @Resource
     private EmployeeService employeeService;
-    @Autowired
+    @Resource
     private JwtProperties jwtProperties;
 
     /**
@@ -70,5 +72,19 @@ public class EmployeeController {
     public Result<String> logout() {
         return Result.success();
     }
+
+
+    /**
+     * 新增员工
+     *
+     * @return
+     *
+     */
+    @PostMapping
+   public Result save(@RequestBody EmployeeDTO employeeDTO){
+        System.out.println("拦截器里的线程id"+Thread.currentThread().getId());
+        employeeService.save(employeeDTO);
+       return Result.success();
+   }
 
 }
