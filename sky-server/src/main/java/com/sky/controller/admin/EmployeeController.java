@@ -99,4 +99,9 @@ public class EmployeeController {
         return Result.success(pageResult);
 
    }
+   @PostMapping("/status/{status}")
+   public Result updateStatus(@PathVariable Integer status,@RequestParam Long id){
+       employeeService.updateStatus(status,id);
+       return Result.success();
+   }
 }
