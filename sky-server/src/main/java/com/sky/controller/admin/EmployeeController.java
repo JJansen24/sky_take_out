@@ -104,4 +104,26 @@ public class EmployeeController {
        employeeService.updateStatus(status,id);
        return Result.success();
    }
+
+    /**
+     * 根据id拿到编辑对象
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+   public Result<Employee> getUserById(@PathVariable Long id){
+        Employee employee = employeeService.getUserById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 修改员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    public Result editPerson(@RequestBody EmployeeDTO employeeDTO){
+        employeeService.editPerson(employeeDTO);
+        return Result.success();
+    }
 }
